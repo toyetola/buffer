@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Account.login');
 });
+
+
+Route::get('/newAccount', function () {
+    return view('Account.addUser');
+})->name('register');
+
+Route::get('/dashboard', function () {
+    $news = \App\Models\news::all();
+    return view('dashboard', ['news'=>$news]);
+})->name('dashboard');
+

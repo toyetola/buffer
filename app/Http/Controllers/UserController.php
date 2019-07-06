@@ -25,7 +25,7 @@
                 return response()->json(['error' => 'could_not_create_token'], 500);
             }
 
-            return response()->json(['status'=>'Wow!    You are Logged In','token'=>$token]);
+            return response()->json(['status'=>'logged in','token'=>$token]);
 
             /*$credentials = $request->only('email', 'password');
             if (!$token = JWTAuth::attempt($credentials)) {
@@ -45,17 +45,15 @@
         {
             try{
                 $validator = Validator::make($request->all(), [
-                    'name' => 'required|string|max:255',
                     'email' => 'required|string|email|max:255|unique:users',
                     'password' => 'required|string|min:6|confirmed',
                 ]);
 
                 if($validator->fails()){
-                    return response()->json($validator->errors()->toJson(), 400);
+                    return response()->json($validator->errors()->toJson(), 401);
                 }
 
                 $user = User::create([
-                    'name' => $request->get('name'),
                     'email' => $request->get('email'),
                     'password' => Hash::make($request->get('password')),
                 ]);
@@ -78,6 +76,7 @@
                 'data' => $user
             ]);
         }
+
 
         public function getAuthenticatedUser()
         {
