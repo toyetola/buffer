@@ -91,7 +91,7 @@ $(document).on('click', '#sub', function (e) {
                 $('input[name=email]').val('');
                 $('input[name=password]').val('');
             }else{
-                alert('Error, please try again');
+                alert('Error, please try again. Note: Your password must not be less than 6 characters');
             }
         });
 });
