@@ -92,9 +92,13 @@
 					}
 					localStorage.setItem('token', data.token);
 					location.href = "{{url('/')}}/dashboard"
+				}else if(data.error){
+                    alert('Wrong username or password');
 				}else{
 				    alert('Wrong username or password');
 				}
+            }).then('error', function () {
+                alert('Wrong username or password');
             });
     	})
 

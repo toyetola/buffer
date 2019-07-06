@@ -223,7 +223,7 @@
                             </h6>
                         </div>
                     </div>
-
+                <div><p id="logout" style="color: blue; cursor: pointer; float: right; font-size: 30px;">Logout</p></div>
                 </div>
             </div>
         </div>
@@ -466,6 +466,21 @@
                 $('#showmsg').append('<p>Deleted Successfully</p>');
                 $('#successmsg').modal('toggle');
                 location.reload();
+            }else if(resp.status == "error"){
+                alert('Oopss, try again');
+            }else if(resp.status == "Token is Expired"){
+                location.href= "{{url('/')}}";
+            }
+        });
+    });
+
+    $(document).on('click', '#logout', function(){
+        //let id = $(this).data('del');
+        $.post('{{url('/')}}/api/logout', {token:localStorage.getItem('token')}, function (resp) {
+            console.log(resp);
+            if(resp.status == "success"){
+                alert('You are Logged out');
+                location.href= "{{url('/')}}";
             }else if(resp.status == "error"){
                 alert('Oopss, try again');
             }else if(resp.status == "Token is Expired"){
